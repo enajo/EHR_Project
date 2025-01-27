@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="System Settings - EHR System">
+    <title>System Settings - EHR System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header><h2>System Settings</h2></header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">EHR System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/manage-users">Manage Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/system-overview">System Overview</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/admin/system-settings">System Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- System Settings Section -->
+    <div class="container py-5">
+        
+        <form action="/admin/system-settings" method="POST" class="bg-light p-4 rounded shadow">
+            <div class="mb-3">
+                <label for="setting_name" class="form-label">Setting Name</label>
+                <input type="text" class="form-control" id="setting_name" name="setting_name" placeholder="Enter setting name" required>
+            </div>
+            <div class="mb-3">
+                <label for="setting_value" class="form-label">Setting Value</label>
+                <input type="text" class="form-control" id="setting_value" name="setting_value" placeholder="Enter setting value" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save Setting</button>
+                <a href="/admin/dashboard" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+
+        <div class="mt-5">
+            <h4 class="text-secondary">Existing Settings</h4>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Setting Name</th>
+                        <th>Setting Value</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for setting in settings %}
+                    <tr>
+                        <td>{{ setting.setting_name }}</td>
+                        <td>{{ setting.setting_value }}</td>
+                        <td>{{ setting.updated_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4 mt-auto">
+        <div class="container text-center">
+            <p class="text-secondary mb-0">&copy; 2024 EHR System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
